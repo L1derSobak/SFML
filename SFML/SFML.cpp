@@ -1,44 +1,19 @@
 ﻿#include <iostream>
-
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
+#include "Game.h"
 
 int main()
 {
-    //Window
-    sf::RenderWindow window(sf::VideoMode(640, 480), "My first SFML programm!", sf::Style::Titlebar | sf::Style::Close);
-    sf::Event ev;
+    //Init Game engine
+    Game game;
 
     //Game loop
-    while (window.isOpen())
+    while (game.getWindowIsOpen())
     {
-        //Event polling
-        while (window.pollEvent(ev))
-        {
-            switch (ev.type)
-            {
-            case sf::Event::Closed:
-                window.close();
-                break;
-            case sf::Event::KeyPressed:
-                if (ev.key.code == sf::Keyboard::Escape)
-                    window.close();
-                break;
-            }
-        }
-
         //Update
+        game.Update();
 
-
-         //Render
-        window.clear(sf::Color(0, 255, 141, 255));//CLear old frame
-
-        //Draw your game
-
-        window.display(); //Tell app that window is done drawing       
+        //Render
+        game.Render();
     }
 
     //End of application
